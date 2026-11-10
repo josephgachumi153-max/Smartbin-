@@ -1,0 +1,26 @@
+{
+  "architecture": "MobileNetV2 transfer learning",
+  "image_size": [
+    160,
+    160
+  ],
+  "classes": [
+    "cardboard",
+    "paper",
+    "textile_trash",
+    "glass",
+    "metal",
+    "vegetation",
+    "miscellaneous_trash",
+    "plastic"
+  ],
+  "dataset": "RealWaste (Food Organics excluded)",
+  "image_count": 4341,
+  "train_count": 3041,
+  "validation_count": 650,
+  "test_count": 650,
+  "test_loss": 0.626811683177948,
+  "test_accuracy": 0.7615384459495544,
+  "seed": 42,
+  "training_seconds": 906.6
+}

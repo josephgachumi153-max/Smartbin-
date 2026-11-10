@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SmartBin – Trash Classifier</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>SmartBin – Classify Your Trash</h1>
+  <form id="upload-form" enctype="multipart/form-data">
+    <input type="file" name="file" accept="image/*" required>
+    <button type="submit">Classify</button>
+  </form>
+  <pre id="result"></pre>
+
+  <script>
+    const form = document.getElementById('upload-form');
+    const resultBox = document.getElementById('result');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fileInput = form.querySelector('input[name="file"]');
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      resultBox.textContent = '⏳ Running inference…';
+      try {
+        const resp = await fetch('/predict', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await resp.json();
+        if (resp.ok) {
+          resultBox.textContent = `🗑️ Predicted: ${data.class_name}\n\nFull probabilities:\n${JSON.stringify(data.probabilities, null, 2)}`;
+        } else {
+          resultBox.textContent = `❌ Error: ${data.error}`;
+        }
+      } catch (err) {
+        resultBox.textContent = `❌ Network error: ${err}`;
+      }
+    });
+  </script>
+</body>
+</html>
+

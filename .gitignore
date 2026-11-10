@@ -1,0 +1,12 @@
+venv/
+training_data/
+SmartBinExtracted/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.zip
+
+# Generated/temporary model outputs
+smartbin2_outputs/
+model/smartbin2_outputs/
+model/dataset_audit.csv
